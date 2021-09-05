@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
+    "@types/mysql": "^2.15.19",
     "core-js": "^3.15.1",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
