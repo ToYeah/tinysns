@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
   database: 'timessns',
 })
 
-app.get('/db', (_req, res) => {
+app.get('/', (_req, res) => {
   res.set({ 'Access-Control-Allow-Origin': '*' })
   connection.query('SELECT * from User', (error, results) => {
     if (error) throw error
@@ -17,6 +17,7 @@ app.get('/db', (_req, res) => {
   })
 })
 
-app.listen(5000, () => {
-  console.log('listening on port 5000')
-})
+module.exports = {
+  path: '/api',
+  handler: app,
+}
