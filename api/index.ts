@@ -24,6 +24,21 @@ app.post('/login', (req, res) => {
   )
 })
 
+app.get('/tweet/recently', (req, res) => {
+  if (req.body.index === undefined || req.body.volume === undefined)
+    throw new Error('invalid format')
+  res.set({ 'Access-Control-Allow-Origin': '*' })
+  connection.query(
+    `SELECT * FROM Tweet ORDER BY timestamp DESC LIMIT ${
+      req.body.index * 10
+    }, ${req.body.volume};`,
+    (error, results) => {
+      if (error) throw error
+      res.send(results)
+    }
+  )
+})
+
 module.exports = {
   path: '/api',
   handler: app,
