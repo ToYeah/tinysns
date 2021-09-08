@@ -9,12 +9,19 @@ const connection = mysql.createConnection({
   database: 'timessns',
 })
 
-app.get('/', (_req, res) => {
+app.use(express.json())
+
+app.post('/login', (req, res) => {
+  if (!req.body.username || !req.body.password)
+    throw new Error('invalid format')
   res.set({ 'Access-Control-Allow-Origin': '*' })
-  connection.query('SELECT * from User', (error, results) => {
-    if (error) throw error
-    res.send(results[0])
-  })
+  connection.query(
+    `SELECT id FROM User WHERE name = '${req.body.username}' AND password = '${req.body.password}'`,
+    (error, results) => {
+      if (error) throw error
+      res.send(results[0])
+    }
+  )
 })
 
 module.exports = {

@@ -1,7 +1,31 @@
 <template>
-  <form action="http://localhost:3000/api/login" method="post">
-    <input type="text" name="username" id="" />
-    <input type="password" name="password" id="" />
-    <input type="submit" value="Try Auth" />
-  </form>
+  <v-row>
+    <v-col>
+      <v-text-field v-model="username" label="username"> </v-text-field>
+      <v-text-field v-model="password" label="password"> </v-text-field>
+      <v-btn rounded @click="tryLogin">login</v-btn>
+    </v-col>
+  </v-row>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import axios from 'axios'
+export default Vue.extend({
+  data() {
+    return {
+      username: '',
+      password: '',
+    }
+  },
+  methods: {
+    async tryLogin() {
+      const res = await axios.post('api/login', {
+        username: this.username,
+        password: this.password,
+      })
+      this.$accessor.login.setid(Number(res.data.id))
+    },
+  },
+})
+</script>
