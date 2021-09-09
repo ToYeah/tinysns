@@ -27,12 +27,29 @@ app.post('/login', (req, res) => {
 app.post('/tweet/init', (_req, res) => {
   res.set({ 'Access-Control-Allow-Origin': '*' })
   connection.query(
-    `SELECT T.id, T.body, T.timestamp, U.name FROM Tweet AS T INNER JOIN User AS U ON U.id = T.user_id  ORDER BY timestamp DESC LIMIT 20;`,
+    `SELECT T.id, T.body, T.timestamp, T.user_id, U.name FROM Tweet AS T INNER JOIN User AS U ON U.id = T.user_id  ORDER BY timestamp DESC LIMIT 20;`,
     (error, results) => {
       if (error) throw error
       res.send(results)
     }
   )
+})
+
+app.post('/tweet/add', (req, res) => {
+  if (!req.body.tweet) throw new Error('invalid format')
+  let id = 0
+  res.set({ 'Access-Control-Allow-Origin': '*' })
+  connection.query(`select MAX(id) as max from Tweet;`, (error, results) => {
+    if (error) throw error
+    id = results[0].max + 1
+    connection.query(
+      `INSERT INTO Tweet VALUES (${id}, '${req.body.tweet.body}', '${req.body.tweet.userId}', (SELECT FROM_UNIXTIME(${req.body.tweet.timestamp})));`,
+      (error, _results) => {
+        if (error) throw error
+        res.send('succcess')
+      }
+    )
+  })
 })
 
 module.exports = {

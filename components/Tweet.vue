@@ -22,7 +22,7 @@ export default Vue.extend({
       tweets: [] as Tweet[],
     }
   },
-  async created() {
+  async mounted() {
     const res = await axios.post('api/tweet/init')
     this.tweets = parseTweet(res)
   },

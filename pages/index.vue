@@ -5,6 +5,7 @@
       <v-text-field v-model="password" label="password"> </v-text-field>
       <v-btn rounded @click="tryLogin">login</v-btn>
       <tweet></tweet>
+      <tweet-form></tweet-form>
     </v-col>
   </v-row>
 </template>
@@ -13,9 +14,10 @@
 import Vue from 'vue'
 import axios from 'axios'
 import Tweet from '~/components/Tweet.vue'
+import TweetForm from '~/components/TweetForm.vue'
 
 export default Vue.extend({
-  components: { Tweet },
+  components: { Tweet, TweetForm },
   data() {
     return {
       username: '',

@@ -4,18 +4,33 @@ export default class Tweet {
   date: Date
   body: string
   name: string
-  constructor(id: string, date: string, body: string, name: string) {
+  userId: number
+  constructor(
+    id: string,
+    date: string,
+    body: string,
+    name: string,
+    userId: string
+  ) {
     this.id = Number(id)
     this.body = body
     this.date = new Date(date)
     this.name = name
+    this.userId = Number(userId)
   }
 }
 
 export const parseTweet = (postRes: AxiosResponse): Tweet[] => {
   const res: Tweet[] = postRes.data.map(
-    (x: { id: string; date: string; body: string; name: string }) => {
-      return new Tweet(x.id, x.date, x.body, x.name)
+    (x: {
+      id: string
+      date: string
+      body: string
+      name: string
+      // eslint-disable-next-line camelcase
+      user_id: string
+    }) => {
+      return new Tweet(x.id, x.date, x.body, x.name, x.user_id)
     }
   )
   return res
