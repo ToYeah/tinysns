@@ -24,14 +24,10 @@ app.post('/login', (req, res) => {
   )
 })
 
-app.get('/tweet/recently', (req, res) => {
-  if (req.body.index === undefined || req.body.volume === undefined)
-    throw new Error('invalid format')
+app.post('/tweet/init', (_req, res) => {
   res.set({ 'Access-Control-Allow-Origin': '*' })
   connection.query(
-    `SELECT * FROM Tweet ORDER BY timestamp DESC LIMIT ${
-      req.body.index * 10
-    }, ${req.body.volume};`,
+    `SELECT T.id, T.body, T.timestamp, U.name FROM Tweet AS T INNER JOIN User AS U ON U.id = T.user_id  ORDER BY timestamp DESC LIMIT 20;`,
     (error, results) => {
       if (error) throw error
       res.send(results)
