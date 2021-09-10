@@ -1,8 +1,8 @@
 <template>
   <v-row>
     <v-col>
-      <tweet></tweet>
       <tweet-form></tweet-form>
+      <tweet></tweet>
     </v-col>
   </v-row>
 </template>

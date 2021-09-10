@@ -1,10 +1,10 @@
 <template>
   <v-row>
     <v-col>
-      <v-card>
+      <v-card class="pa-4 ma-3">
         <v-textarea v-model="body" label="tweet body"></v-textarea>
+        <v-btn rounded @click="addTweet">send</v-btn>
       </v-card>
-      <v-btn rounded @click="addTweet">send</v-btn>
     </v-col>
   </v-row>
 </template>
