@@ -29,6 +29,7 @@
     "nuxt-typed-vuex": "^0.2.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "reset-css": "^5.0.1",
     "vuetify": "^2.5.5"
   },
   "devDependencies": {
