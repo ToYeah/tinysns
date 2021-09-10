@@ -24,13 +24,13 @@ export const parseTweet = (postRes: AxiosResponse): Tweet[] => {
   const res: Tweet[] = postRes.data.map(
     (x: {
       id: string
-      date: string
+      timestamp: string
       body: string
       name: string
       // eslint-disable-next-line camelcase
       user_id: string
     }) => {
-      return new Tweet(x.id, x.date, x.body, x.name, x.user_id)
+      return new Tweet(x.id, x.timestamp, x.body, x.name, x.user_id)
     }
   )
   return res

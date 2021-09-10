@@ -52,6 +52,18 @@ app.post('/tweet/add', (req, res) => {
   })
 })
 
+app.post('/tweet/delete', (req, res) => {
+  if (!req.body.id || !req.body.userId) throw new Error('invalid format')
+  res.set({ 'Access-Control-Allow-Origin': '*' })
+  connection.query(
+    `DELETE FROM Tweet WHERE id = ${req.body.id} AND user_id = ${req.body.userId} `,
+    (error, _results) => {
+      if (error) throw error
+      res.send('success')
+    }
+  )
+})
+
 module.exports = {
   path: '/api',
   handler: app,

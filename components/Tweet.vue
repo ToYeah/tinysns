@@ -1,9 +1,8 @@
 <template>
   <v-row>
     <v-col>
-      <v-card v-for="tweet in tweets" :key="tweet.id">
-        {{ tweet.body }}
-      </v-card>
+      <tweet-card v-for="tweet in tweets" :key="tweet.id" :tweet="tweet">
+      </tweet-card>
     </v-col>
   </v-row>
 </template>
