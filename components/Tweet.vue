@@ -1,7 +1,12 @@
 <template>
   <v-row>
     <v-col>
-      <tweet-card v-for="tweet in tweets" :key="tweet.id" :tweet="tweet">
+      <tweet-card
+        v-for="tweet in tweets"
+        :key="tweet.id"
+        :tweet="tweet"
+        @delete="deleteTweet"
+      >
       </tweet-card>
     </v-col>
   </v-row>
@@ -25,6 +30,12 @@ export default Vue.extend({
     const res = await axios.post('api/tweet/init')
     this.tweets = parseTweet(res)
   },
-  methods: {},
+  methods: {
+    deleteTweet(id: number) {
+      const index = this.tweets.findIndex((x) => x.id === id)
+      this.tweets.splice(index, 1)
+      console.log(index)
+    },
+  },
 })
 </script>

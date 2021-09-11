@@ -39,6 +39,7 @@ export default Vue.extend({
         id: this.tweet.id,
         userId: this.$accessor.login.id,
       })
+      this.$emit('delete', this.tweet.id)
     },
   },
 })
