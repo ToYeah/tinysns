@@ -1,17 +1,19 @@
 <template>
-  <v-card class="ma-3 pa-4">
-    <div class="tweetCard--userInfo my-1 mx-2">
-      <span>{{ tweet.name }}</span>
-      <span>
-        <span class="mr-1">{{ time }}</span>
-        <v-icon v-if="isDeletable" @click="deleteTweet">mdi-delete</v-icon>
-      </span>
-    </div>
-    <v-divider></v-divider>
-    <div class="mt-2 mx-2">
-      {{ tweet.body }}
-    </div>
-  </v-card>
+  <transition name="tweet">
+    <v-card class="ma-3 pa-4">
+      <div class="tweetCard--userInfo my-1 mx-2">
+        <span>{{ tweet.name }}</span>
+        <span>
+          <span class="mr-1">{{ time }}</span>
+          <v-icon v-if="isDeletable" @click="deleteTweet">mdi-delete</v-icon>
+        </span>
+      </div>
+      <v-divider></v-divider>
+      <div class="mt-2 mx-2">
+        {{ tweet.body }}
+      </div>
+    </v-card>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -49,5 +51,13 @@ export default Vue.extend({
 .tweetCard--userInfo {
   display: flex;
   justify-content: space-between;
+}
+
+.tweet-leave-active {
+  transition: opacity 0.5s;
+}
+
+.tweet-leave-active {
+  opacity: 0;
 }
 </style>
