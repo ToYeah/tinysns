@@ -36,7 +36,8 @@ app.post('/tweet/init', (_req, res) => {
 })
 
 app.post('/tweet/add', (req, res) => {
-  if (!req.body.tweet) throw new Error('invalid format')
+  if (!req.body.tweet || req.body.tweet.body === '')
+    throw new Error('invalid format')
   let id = 0
   res.set({ 'Access-Control-Allow-Origin': '*' })
   connection.query(`select MAX(id) as max from Tweet;`, (error, results) => {
